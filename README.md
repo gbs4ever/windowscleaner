@@ -1,13 +1,13 @@
 # Windows Cleanup Utility
 
-A lightweight Windows command-line cleanup tool built with **C# and .NET 8**.
+A lightweight Windows command-line cleanup tool built with **C# and .NET 9**.
 
 Windows Cleanup Utility helps remove unnecessary temporary files and maintenance data to recover disk space and keep Windows systems clean.
 
 ## Built With
 
 - C#
-- .NET 8
+- .NET 9
 - .NET CLI
 - Windows APIs
 - System.ServiceProcess.ServiceController
