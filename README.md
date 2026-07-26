@@ -2,7 +2,7 @@
 
 A lightweight Windows command-line cleanup tool built with **C# and .NET 9**.
 
-Windows Cleanup Utility helps remove unnecessary temporary files and maintenance data to recover disk space and keep Windows systems clean.
+Windows Cleanup Utility helps remove unnecessary temporary files and Windows maintenance data to recover disk space and keep Windows systems clean.
 
 ## Built With
 
@@ -34,9 +34,23 @@ Cleans:
 - Reports skipped files
 - Requires administrator privileges for protected locations
 
-## Getting Started
+---
 
-Clone the repository:
+# Getting Started
+
+## Requirements
+
+- Windows 10 or Windows 11
+- .NET 9 SDK
+- PowerShell
+
+Verify your .NET installation:
+
+```powershell
+dotnet --version
+```
+
+## Clone Repository
 
 ```powershell
 git clone <repository-url>
@@ -49,13 +63,17 @@ Restore dependencies:
 dotnet restore
 ```
 
-## Development
+---
+
+# Development
 
 Run the application from source:
 
 ```powershell
 dotnet run -- --help
 ```
+
+## Commands
 
 ### Show Version
 
@@ -93,48 +111,128 @@ Requires Administrator privileges.
 dotnet run -- --all
 ```
 
-## Publishing
+---
 
-Create a standalone Windows executable:
+# Publishing
+
+The project includes a PowerShell publish script that creates a portable Windows executable.
+
+Run:
 
 ```powershell
-dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
+.\scripts\publish.ps1
 ```
 
-The executable will be generated here:
+The script will:
+
+- Clean previous builds
+- Build the application in Release mode
+- Publish a self-contained Windows executable
+- Create a portable output folder
+- Copy the README with the executable
+
+The output will be:
 
 ```
-bin\Release\net9.0-windows\win-x64\publish\WindowsCleanup.exe
+publish\
+│
+├── WindowsCleanup.exe
+└── README.md
 ```
 
 The published application is self-contained and does not require the .NET runtime to be installed.
 
-## Running the Published Application
+---
 
-Navigate to the publish directory:
+# First Time PowerShell Script Warning
 
-```powershell
-cd bin\Release\net9.0-windows\win-x64\publish
+Windows may block PowerShell scripts by default.
+
+If you receive:
+
+```
+running scripts is disabled on this system
 ```
 
-Run:
+enable locally created scripts by running:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+After confirming the change, close and reopen PowerShell.
+
+This is a one-time setup for your development environment.
+
+Then run:
+
+```powershell
+.\scripts\publish.ps1
+```
+
+---
+
+# Running the Published Application
+
+After publishing:
+
+```powershell
+cd .\publish
+```
+
+Display help:
 
 ```powershell
 .\WindowsCleanup.exe --help
 ```
 
-Example:
+Show version:
+
+```powershell
+.\WindowsCleanup.exe --version
+```
+
+Clean user temporary files:
+
+```powershell
+.\WindowsCleanup.exe --temp
+```
+
+Clean Windows temporary files:
+
+> Requires Administrator privileges.
+
+```powershell
+.\WindowsCleanup.exe --windows-temp
+```
+
+Clean Windows Update cache:
+
+> Requires Administrator privileges.
+
+```powershell
+.\WindowsCleanup.exe --update-cache
+```
+
+Run all cleanup tasks:
+
+> Requires Administrator privileges.
 
 ```powershell
 .\WindowsCleanup.exe --all
 ```
 
-## Project Structure
+---
+
+# Project Structure
 
 ```
 WindowsCleanup.CLI
 │
 ├── Program.cs
+│
+├── scripts
+│   └── publish.ps1
 │
 └── Services
     ├── CleanupService.cs
@@ -144,7 +242,31 @@ WindowsCleanup.CLI
     └── AppInfo.cs
 ```
 
-## Roadmap
+---
+
+# Versioning
+
+The application version is managed through the project file:
+
+```
+WindowsCleanup.CLI.csproj
+```
+
+Example:
+
+```xml
+<Version>1.0.0</Version>
+```
+
+Display the current version:
+
+```powershell
+.\WindowsCleanup.exe --version
+```
+
+---
+
+# Roadmap
 
 Future improvements:
 
@@ -156,7 +278,10 @@ Future improvements:
 - [ ] Windows repair tools
 - [ ] Scheduled cleanup
 - [ ] GUI application
+- [ ] Windows installer package
 
-## License
+---
+
+# License
 
 MIT License
