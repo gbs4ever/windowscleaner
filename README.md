@@ -191,29 +191,6 @@ Show version:
 ```powershell
 .\WindowsCleanup.exe --version
 ```
-
-Clean user temporary files:
-
-```powershell
-.\WindowsCleanup.exe --temp
-```
-
-Clean Windows temporary files:
-
-> Requires Administrator privileges.
-
-```powershell
-.\WindowsCleanup.exe --windows-temp
-```
-
-Clean Windows Update cache:
-
-> Requires Administrator privileges.
-
-```powershell
-.\WindowsCleanup.exe --update-cache
-```
-
 Run all cleanup tasks:
 
 > Requires Administrator privileges.
@@ -247,17 +224,6 @@ WindowsCleanup.CLI
 # Versioning
 
 The application version is managed through the project file:
-
-```
-WindowsCleanup.CLI.csproj
-```
-
-Example:
-
-```xml
-<Version>1.0.0</Version>
-```
-
 Display the current version:
 
 ```powershell
