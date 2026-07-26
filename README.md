@@ -34,53 +34,7 @@ Cleans:
 - Reports skipped files
 - Requires administrator privileges for protected locations
 
-## Usage
-
-Run the application:
-
-```powershell
-WindowsCleanup.exe --help
-```
-
-### Clean User Temp Files
-
-```powershell
-WindowsCleanup.exe --temp
-```
-
-### Clean Windows Temp Files
-
-```powershell
-WindowsCleanup.exe --windows-temp
-```
-
-### Clean Windows Update Cache
-
-```powershell
-WindowsCleanup.exe --update-cache
-```
-
-### Run All Cleanup Tasks
-
-```powershell
-WindowsCleanup.exe --all
-```
-
-## Development
-
-### Requirements
-
-- Windows 10/11
-- .NET 8 SDK
-- Visual Studio 2022 or VS Code
-
-Check .NET installation:
-
-```powershell
-dotnet --version
-```
-
-## Build
+## Getting Started
 
 Clone the repository:
 
@@ -95,30 +49,84 @@ Restore dependencies:
 dotnet restore
 ```
 
-Build:
+## Development
+
+Run the application from source:
 
 ```powershell
-dotnet build
+dotnet run -- --help
 ```
 
-Run:
+### Show Version
+
+```powershell
+dotnet run -- --version
+```
+
+### Clean User Temporary Files
 
 ```powershell
 dotnet run -- --temp
 ```
 
-## Publish Standalone EXE
+### Clean Windows Temporary Files
 
-Create a Windows executable:
+Requires Administrator privileges.
+
+```powershell
+dotnet run -- --windows-temp
+```
+
+### Clean Windows Update Cache
+
+Requires Administrator privileges.
+
+```powershell
+dotnet run -- --update-cache
+```
+
+### Run All Cleanup Tasks
+
+Requires Administrator privileges.
+
+```powershell
+dotnet run -- --all
+```
+
+## Publishing
+
+Create a standalone Windows executable:
 
 ```powershell
 dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
 ```
 
-Output:
+The executable will be generated here:
 
 ```
-bin\Release\net8.0-windows\win-x64\publish\
+bin\Release\net9.0-windows\win-x64\publish\WindowsCleanup.exe
+```
+
+The published application is self-contained and does not require the .NET runtime to be installed.
+
+## Running the Published Application
+
+Navigate to the publish directory:
+
+```powershell
+cd bin\Release\net9.0-windows\win-x64\publish
+```
+
+Run:
+
+```powershell
+.\WindowsCleanup.exe --help
+```
+
+Example:
+
+```powershell
+.\WindowsCleanup.exe --all
 ```
 
 ## Project Structure
@@ -132,7 +140,8 @@ WindowsCleanup.CLI
     ├── CleanupService.cs
     ├── WindowsUpdateService.cs
     ├── ConsoleLogger.cs
-    └── AdminService.cs
+    ├── AdminService.cs
+    └── AppInfo.cs
 ```
 
 ## Roadmap
