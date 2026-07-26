@@ -17,6 +17,10 @@ if (args.Length == 0|| args.Length > 1)
 
 switch (args[0].ToLower())
 {
+    case "--v":
+    case "--version":
+        AppInfo.ShowVersion();
+        break;
     case TempCommand:
         cleanup.CleanUserTemp();
         break;
@@ -68,11 +72,11 @@ static void ShowHelp()
 
     Commands:
 
-      --temp              Clean user temp files
-      --windows-temp      Clean Windows temp files
-      --update-cache      Clean Windows Update cache
-      --all               Run all cleanup tasks
-      --help              Show help
-
+    --temp              Clean user temp files
+    --windows-temp      Clean Windows temp files
+    --update-cache      Clean Windows Update cache
+    --all               Run all cleanup tasks
+    --help              Show help
+    --version           Show application version
     """);
 }
